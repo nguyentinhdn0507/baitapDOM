@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ## Bài 1a: Tạo form để nhập chiều dài, chiều rộng. Khi bấm submit thì tính chu vi và diện tích hình chữ nhật
 ![alt text](bai1/bai1a.jpg)
 
@@ -22,3 +23,9 @@
 ![alt text](bai4/bai4err.jpg)
 
 ## Bài 5: Xem code và ghi chép những gì học được
+=======
+## Viết code trong file main.js để render mảng listNews ra giao diện file index.html
+- xem bố cục file index2.html là file hoàn chỉnh
+
+![alt text](template.jpg)
+>>>>>>> finishExcersie
