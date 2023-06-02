@@ -57,10 +57,15 @@ const students = [
 // btnUpdate.removeEventListener("click", updateHandler);
 // };
 
-    ///////////
+##########
+Anh test dùm em funtion này, em không hiểu tại chỗ
+studentToUpdate.name = updatedName;
+studentToUpdate.address = updatedAddress;
+2 chỗ này bị undefined
+a giải thích dùm em với
+//////////////
 
 const updateHandler = (studentToUpdate, btnUpdate) => {
-
 const updatedName = document.getElementsByName("name")[0].value;
 const updatedAddress = document.getElementsByName("address")[0].value;
 studentToUpdate.name = updatedName;
@@ -84,3 +89,4 @@ btnUpdate.style.display = "inline-block";
 btnUpdate.addEventListener("click", handleUpdate);
 }
 };
+##########
