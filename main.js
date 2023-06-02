@@ -46,7 +46,7 @@ const renderListStudent = () => {
                   <div>Address : ${student.address}</div>
                   <div>
                       <button class="btn btn-primary" onclick="onUpdateStudent('${student.id}')">Edit</button>    
-                      <button id ="btn-delete" class="btn btn-danger" onclick="onDelete(${student.id})">Delete</button>
+                      <button id ="btn-delete" class="btn btn-danger" onclick="onDelete('${student.id}')">Delete</button>
                   </div>
               </div>
           </li>
@@ -64,7 +64,7 @@ const validateForm = () => {
     errorElement[0].textContent = "Vui lòng nhập tên.";
     errorElement[0].style.color = "red";
   } else {
-    errorElement[0].textContent = "";
+    errorElement[0].textContent = " ";
   }
   if (getValueAddress.trim() === "") {
     errorElement[1].textContent = "Vui lòng nhập địa chỉ.";
@@ -81,9 +81,10 @@ const validateForm = () => {
 };
 const btnAddStudent = document.getElementById("create");
 btnAddStudent.addEventListener("click", () => {
+  console.log("runnnn");
   const getValueName = document.getElementsByName("name")[0].value;
   const getValueAddress = document.getElementsByName("address")[0].value;
-  if (validateForm()) {
+  if (!validateForm()) {
     let student = {
       id: Math.random().toString(),
       name: getValueName,
@@ -95,10 +96,8 @@ btnAddStudent.addEventListener("click", () => {
   }
 });
 const onDelete = (id) => {
-  const index = students.filter((student) => student.id !== id);
-  if (index) {
-    students.splice(index, 1);
-  }
+  const idStudent = students.findIndex((student) => student.id === id);
+  students.splice(idStudent, 1);
   renderListStudent();
 };
 const updateInputFields = (name, address) => {
@@ -109,20 +108,24 @@ const resetInputFields = () => {
   document.getElementsByName("name")[0].value = "";
   document.getElementsByName("address")[0].value = "";
 };
+
 const onUpdateStudent = (id) => {
   const studentToUpdate = students.find((student) => student.id === id);
   if (studentToUpdate) {
-    updateInputFields(studentToUpdate.name, studentToUpdate.address);
+    updateInputFields(studentToUpdate?.name, studentToUpdate?.address);
     const btnUpdate = document.getElementById("update");
     btnUpdate.style.display = "inline-block";
-    btnUpdate.addEventListener("click", () => {
-      const updatedName = document.getElementById("name").value;
-      const updatedAddress = document.getElementById("address").value;
+    const updateHandler = () => {
+      const updatedName = document.getElementsByName("name")[0].value;
+      const updatedAddress = document.getElementsByName("address")[0].value;
       studentToUpdate.name = updatedName;
       studentToUpdate.address = updatedAddress;
+      btnUpdate.style.display = "none";
       renderListStudent();
       resetInputFields();
-      btnUpdate.style.display = "none";
-    });
+      btnUpdate.removeEventListener("click", updateHandler);
+    };
+
+    btnUpdate.addEventListener("click", updateHandler);
   }
 };
