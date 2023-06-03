@@ -59,7 +59,6 @@ const validateForm = () => {
   const getValueName = document.getElementsByName("name")[0].value;
   const getValueAddress = document.getElementsByName("address")[0].value;
   const errorElement = document.querySelectorAll(".form-message");
-  const errorMessages = [];
   if (getValueName.trim() === "") {
     errorElement[0].textContent = "Vui lòng nhập tên.";
     errorElement[0].style.color = "red";
@@ -70,21 +69,18 @@ const validateForm = () => {
     errorElement[1].textContent = "Vui lòng nhập địa chỉ.";
     errorElement[1].style.color = "red";
   } else {
-    errorElement[0].textContent = "";
+    errorElement[1].textContent = "";
   }
-  if (errorMessages.length > 0) {
-    errorElement.forEach((element) => {
-      element.textContent = errorMessages.join(" ");
-    });
+  if (getValueName.trim() === "" || getValueAddress.trim() === "") {
     return false;
   }
+  return true;
 };
 const btnAddStudent = document.getElementById("create");
 btnAddStudent.addEventListener("click", () => {
-  console.log("runnnn");
   const getValueName = document.getElementsByName("name")[0].value;
   const getValueAddress = document.getElementsByName("address")[0].value;
-  if (!validateForm()) {
+  if (validateForm()) {
     let student = {
       id: Math.random().toString(),
       name: getValueName,
